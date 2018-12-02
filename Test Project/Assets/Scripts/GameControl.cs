@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameControl : MonoBehaviour {
+public class GameManager : MonoBehaviour {
+    public GameManager instance;
     public GameObject starShip;
     bool starShipActive = true;
 
 	// Use this for initialization
 	void Start () {
-		
+		if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            Debug.Log("A second game manager already exists.  The new game manager was destroyed.");
+        }
 	}
 	
 	// Update is called once per frame

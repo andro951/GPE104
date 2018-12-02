@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 1054705960}
   - component: {fileID: 1054705959}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,6 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62db8fe35b074fc4c83f095d7509a61d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starShip: {fileID: 0}
+  starShipActive: 1
 --- !u!212 &1054705960
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -305,7 +307,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e17c37d0e3249d4eb5fb288ca2426d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starShip: {fileID: 1533464955}
+  upSpeed: 1
+  downSpeed: 1
+  leftSpeed: 1
+  rightSpeed: 1
 --- !u!212 &1533464957
 SpriteRenderer:
   m_ObjectHideFlags: 0
