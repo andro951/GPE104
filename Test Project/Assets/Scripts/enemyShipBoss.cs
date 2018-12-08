@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyShipBoss : MonoBehaviour {
+public class EnemyShipBoss : MonoBehaviour {
     private Rigidbody2D rb2D;
     private Vector3 vectorToPlayer;
     public float acceleration;
@@ -13,29 +13,27 @@ public class enemyShipBoss : MonoBehaviour {
     private Vector3 targetVector;
     private Vector3 starShipVector;
 
-
-    // Use this for initialization
     void Start()
     {
-        tf = GetComponent<Transform>();
-        rb2D = GetComponent<Rigidbody2D>();
-        GameManager.instance.enemyShipList.Add(this.gameObject);
-        starShipPosition = GameManager.instance.starShip.transform.position;
-        vectorToPlayer = starShipPosition - this.gameObject.transform.position;
-        tf.right = vectorToPlayer;
+        tf = GetComponent<Transform>(); //Get the object's transform
+        rb2D = GetComponent<Rigidbody2D>(); //Get the rigidbody2d component
+        GameManager.instance.enemyShipList.Add(this.gameObject); //Add to enemyShipList to track that this object exists
+        starShipPosition = GameManager.instance.starShip.transform.position; //Used to store the starShip's position
+        vectorToPlayer = starShipPosition - this.gameObject.transform.position; //Create a vector from this object to the starShip
+        tf.right = vectorToPlayer; //Face this object towards starShip
+
         //In progress.  Does not currently Work.
         //starShipPositionOld = starShipPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
 
-        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
-        vectorToPlayer.Normalize();
-        tf.right = tf.right + vectorToPlayer * turnSpeed;
-        rb2D.AddForce(tf.right * acceleration);
+        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position; //Recalculate a vector to starShip
+        vectorToPlayer.Normalize(); //Make the vector a standar size for easier use
+        tf.right = tf.right + vectorToPlayer * turnSpeed; //turn towards the vector based on turnspeed
+        rb2D.AddForce(tf.right * acceleration); //Add thrust to this object based on acceleration
 
         //In progress.  Does not currently Work.
         //vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
@@ -51,14 +49,14 @@ public class enemyShipBoss : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); //If this object collides with starShip, destroy starShip
         }
-        Destroy(gameObject);
+        Destroy(gameObject); //If this object collides, destroy it
     }
 
     void OnDestroy()
     {
-        GameManager.instance.enemyShipList.Remove(this.gameObject);
-        GameManager.instance.score += 100;
+        GameManager.instance.enemyShipList.Remove(this.gameObject); //Remove from enemyShipList to track that this object no longer exists
+        GameManager.instance.score += 100; //Reward 100 points
     }
 }

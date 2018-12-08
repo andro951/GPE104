@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class lives : MonoBehaviour {
+public class Lives : MonoBehaviour {
     public Text scoreText;
-    // Use this for initialization
-    void Start()
-    {
 
-    }
-    // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Lives: " + GameManager.instance.lives;
+        scoreText.text = "Lives: " + GameManager.instance.lives; //Display the number of lives.
     }
 }

@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour {
     public int lives;
     public int respawnTimer;
 
-    // Use this for initialization
     void Start () {
+        //Prevents a second GameManager from being created
         if (instance == null)
         {
             instance = this;
@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
             Debug.Log("A second game manager already exists.  The new game manager was destroyed.");
         }
+
+        //Create spawn points for asteroids and enemyShips
         spawnPoint = new Vector3[16];
         spawnPoint[0].Set (12, 0, 0);
         spawnPoint[1].Set(12, 3, 0);
@@ -56,14 +58,13 @@ public class GameManager : MonoBehaviour {
         spawnPoint[14].Set(6, -7, 0);
         spawnPoint[15].Set(-6, -7, 0);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit(); //Closes sprite mover when Q is pressed.
+            Application.Quit(); //Closes the game when escape is pressed.
         }
-        else if (Input.GetKeyDown(KeyCode.Backspace)) //Q toggles starShip active or inactive.
+        else if (Input.GetKeyDown(KeyCode.Backspace)) //Backspace toggles starShip active or inactive.
         {
             if (starShipActive) //If starShip is active, set it to inactive.
             {
@@ -76,45 +77,45 @@ public class GameManager : MonoBehaviour {
                 starShipActive = true;
             }
         }
-        else if (starShipList.Count < 1)
+        else if (starShipList.Count < 1) //If starShip does not exist
         {
-            if (lives > 0)
+            if (lives > 0) //And if there are lives left
             {
-                starShip = Instantiate(starShipPref, Vector3.zero, Quaternion.Euler(Vector3.zero)) as GameObject;
+                starShip = Instantiate(starShipPref, Vector3.zero, Quaternion.Euler(Vector3.zero)) as GameObject; //Create a new object for starShip. (spawn/respawn)
             }
             else
             {
-                gameOver = true;
-                gameOverText.SetActive(true);
+                gameOver = true; //If there are 0 lives left, the game is over.
+                gameOverText.SetActive(true); //Display game over.
             }
         }
-        else if (!gameOver)
+        else if (!gameOver) //If the game is NOT over
         {
-            if (asteroidList.Count < maxNumberOfAsteroids)
+            if (asteroidList.Count < maxNumberOfAsteroids) //If there are less than the maximum number of allowed asterioids, create a new asteroid
             {
-                int randomSpawnPointNumber = Random.Range(0, spawnPoint.Length);
-                GameObject newAsteroid = Instantiate(asteroid, spawnPoint[randomSpawnPointNumber], Quaternion.Euler(Vector3.zero)) as GameObject;
-                if (newAsteroid != null)
+                int randomSpawnPointNumber = Random.Range(0, spawnPoint.Length); //Select the number for a random spawn point
+                GameObject newAsteroid = Instantiate(asteroid, spawnPoint[randomSpawnPointNumber], Quaternion.Euler(Vector3.zero)) as GameObject; //Create asteriod
+                if (newAsteroid != null) //Currently not used
                 {
 
                 }
             }
-            if (enemyShipList.Count < maxNumberOfEnemyShips)
+            if (enemyShipList.Count < maxNumberOfEnemyShips) //If there are less than the maximum number of allowed enemyShips, create a new enemyShip
             {
-                int randomSpawnPointNumber = Random.Range(0, spawnPoint.Length);
-                if (bossCounter < score / bossSpawnScore)
+                int randomSpawnPointNumber = Random.Range(0, spawnPoint.Length); //Select the number for a random spawn point
+                if (bossCounter < score / bossSpawnScore) //If the player's score has reached the threshold for spawning a boss, bossSpawnScore, spawn an enemyShipBoss
                 {
                     GameObject newEnemyShipBoss = Instantiate(enemyShipBoss, spawnPoint[randomSpawnPointNumber], Quaternion.Euler(Vector3.zero)) as GameObject;
-                    bossCounter += 1;
-                    if (newEnemyShipBoss != null)
+                    bossCounter += 1; //Prevent an enemyShipBoss from spawning until the score threshold is reached again
+                    if (newEnemyShipBoss != null) //Currently not used
                     {
 
                     }
                 }
-                else
+                else //Otherwise, spawn a normal enemyShip
                 {
                     GameObject newEnemyShip = Instantiate(enemyShip, spawnPoint[randomSpawnPointNumber], Quaternion.Euler(Vector3.zero)) as GameObject;
-                    if (newEnemyShip != null)
+                    if (newEnemyShip != null) //Currently not used
                     {
 
                     }

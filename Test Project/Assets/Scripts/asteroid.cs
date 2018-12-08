@@ -11,32 +11,32 @@ public class asteroid : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        tf = GetComponent<Transform>();
-        rb2D = GetComponent<Rigidbody2D>();
-        GameManager.instance.asteroidList.Add(this.gameObject);
-        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
-        tf.right = vectorToPlayer;
+        tf = GetComponent<Transform>(); //Get the object's transform
+        rb2D = GetComponent<Rigidbody2D>(); //Get the rigidbody2d component
+        GameManager.instance.asteroidList.Add(this.gameObject); //Add to asteroidList to track that this object exists
+        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position; //Create a vector from this object to the starShip
+        tf.right = vectorToPlayer; //Face this object towards starShip
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        rb2D.AddForce(tf.right * acceleration);
+        rb2D.AddForce(tf.right * acceleration); //Add thrust to this object based on acceleration
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Destroy(other.gameObject);
+            Destroy(other.gameObject); //If this object collides with starShip, destroy starShip
         }
         Destroy(gameObject);
     }
 
     void OnDestroy()
     {
-        GameManager.instance.asteroidList.Remove(this.gameObject);
-        GameManager.instance.score += 10;
+        GameManager.instance.asteroidList.Remove(this.gameObject); //Remove from asteroidList to track that this object no longer exists
+        GameManager.instance.score += 10; //Reward 10 points
     }
 
 }
