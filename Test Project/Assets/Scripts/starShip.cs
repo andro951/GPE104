@@ -5,6 +5,7 @@ using UnityEngine;
 public class StarShip : MonoBehaviour {
     private SpriteRenderer theRenderer;
     private Transform tf;
+    bool pause = false;
     public float turnSpeed;
     public float speed;
     public float ForwardAcceleration;
