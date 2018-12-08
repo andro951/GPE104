@@ -8,15 +8,19 @@ public class SpriteChanger : MonoBehaviour {
     private Transform tf;
     bool pause = false;
     //up, down, left and rightSpeed allow the developer to alter the speed of starShip through the inspector window of Unity.
-    public float upSpeed = 1;
-    public float downSpeed = 1;
-    public float leftSpeed = 1;
-    public float rightSpeed = 1;
+    public float turnSpeed;
+    public float speed;
+    public float ForwardAcceleration;
+    public float reverseAcceleration;
+    public float sideAcceleration;
+    private Rigidbody2D rb2D;
 
     // Use this for initialization
     void Start () {
+        GameManager.instance.starShipList.Add(this.gameObject);
         theRenderer = gameObject.GetComponent<SpriteRenderer>();
         tf = GetComponent<Transform>();
+        rb2D = GetComponent<Rigidbody2D>();
         if (theRenderer != null)
         {
             theRenderer.color = Color.green; //Change the color of starShip to green.
@@ -41,51 +45,52 @@ public class SpriteChanger : MonoBehaviour {
 
         if (!pause) //If the game is not paused, take the user's input.
         {
-            if (Input.GetKey(KeyCode.LeftShift)) //If shift is pressed, the arrow keys will cause starShip to move 1 increment at at time for each time the arrow key is pressed and released.
+            if (Input.GetKey(KeyCode.A))
             {
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    tf.position = tf.position + Vector3.left * leftSpeed;
-                }
-                if (Input.GetKeyDown(KeyCode.RightArrow))
-                {
-                    tf.position = tf.position + Vector3.right * rightSpeed;
-                }
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-                    tf.position = tf.position + Vector3.up * upSpeed;
-                }
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    tf.position = tf.position + Vector3.down * downSpeed;
-                }
+                tf.Rotate(0, 0, turnSpeed);
             }
-            else //If shift is not pressed, the arrow keys will continuously move starShip.
+            if (Input.GetKey(KeyCode.D))
             {
-                if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    tf.position = tf.position + Vector3.left * leftSpeed;
-                }
-                else if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    tf.position = tf.position + Vector3.right * rightSpeed;
-                }
-                else if (Input.GetKey(KeyCode.UpArrow))
-                {
-                    tf.position = tf.position + Vector3.up * upSpeed;
-                }
-                else if (Input.GetKey(KeyCode.DownArrow))
-                {
-                    tf.position = tf.position + Vector3.down * downSpeed;
-                }
+                tf.Rotate(0, 0, -turnSpeed);
             }
-
-
+            if (Input.GetKey(KeyCode.W))
+            {
+                rb2D.AddForce(tf.right * ForwardAcceleration);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                rb2D.AddForce(-tf.right * reverseAcceleration);
+            }
+            if (Input.GetKey(KeyCode.E))
+            {
+                rb2D.AddForce(-tf.up * sideAcceleration);
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                rb2D.AddForce(tf.up * sideAcceleration);
+            }
 
             if (Input.GetKeyDown(KeyCode.Space)) //If the user presses the space bar, reset starShip's position to the origin.
             {
                 tf.position = Vector3.zero;
             }
         }
+
+    }
+
+    private void OnDestroy()
+    {
+        int lengthOfAsterioidList = GameManager.instance.asteroidList.Count;
+        for (int i = 0; i < lengthOfAsterioidList; i++)
+        {
+            Destroy(GameManager.instance.asteroidList[lengthOfAsterioidList - 1 -i].gameObject);
+        }
+        int lengthOfEnemyShipList = GameManager.instance.enemyShipList.Count;
+        for (int i = 0; i < lengthOfEnemyShipList; i++)
+        {
+            Destroy(GameManager.instance.enemyShipList[lengthOfEnemyShipList - 1 - i].gameObject);
+        }
+        GameManager.instance.lives -= 1;
+        GameManager.instance.starShipList.Remove(this.gameObject);
     }
 }
