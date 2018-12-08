@@ -12,7 +12,8 @@ public class StarShip : MonoBehaviour {
     public float sideAcceleration;
     private Rigidbody2D rb2D;
 
-    void Start () {
+    void Start ()
+    {
         GameManager.instance.starShipList.Add(this.gameObject); //Add this instance of starShip to starShipList to track that it exists.
         theRenderer = gameObject.GetComponent<SpriteRenderer>(); 
         tf = GetComponent<Transform>();
@@ -23,7 +24,8 @@ public class StarShip : MonoBehaviour {
         }
 	}
 	
-	void Update () {
+	void Update ()
+    {
 
         //Player Constrls:
         if (Input.GetKey(KeyCode.A))

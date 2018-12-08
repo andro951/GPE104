@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour {
     public Text scoreText;
 	
-	void Start ()
+	void Start()
     {
 		
 	}
 	
-	void Update ()
+	void Update()
     {
         scoreText.text = "Score: " + GameManager.instance.score; //Display the Player's score
     }

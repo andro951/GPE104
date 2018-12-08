@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     public static GameManager instance;
     public GameObject starShipPref;
     public GameObject asteroid;
@@ -26,8 +27,9 @@ public class GameManager : MonoBehaviour {
     public int lives;
     public int respawnTimer;
 
-    void Start () {
-        //Prevents a second GameManager from being created
+    void Awake()
+    {
+
         if (instance == null)
         {
             instance = this;
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
             Debug.Log("A second game manager already exists.  The new game manager was destroyed.");
         }
+    
 
         //Create spawn points for asteroids and enemyShips
         spawnPoint = new Vector3[16];
@@ -59,7 +62,8 @@ public class GameManager : MonoBehaviour {
         spawnPoint[15].Set(-6, -7, 0);
 	}
 
-	void Update () {
+	void Update ()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit(); //Closes the game when escape is pressed.
@@ -81,7 +85,9 @@ public class GameManager : MonoBehaviour {
         {
             if (lives > 0) //And if there are lives left
             {
+
                 starShip = Instantiate(starShipPref, Vector3.zero, Quaternion.Euler(Vector3.zero)) as GameObject; //Create a new object for starShip. (spawn/respawn)
+
             }
             else
             {

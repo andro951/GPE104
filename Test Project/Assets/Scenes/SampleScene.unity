@@ -385,14 +385,14 @@ GameObject:
   - component: {fileID: 1040127077}
   - component: {fileID: 1040127080}
   - component: {fileID: 1040127079}
-  - component: {fileID: 1040127078}
+  - component: {fileID: 1040127081}
   m_Layer: 5
   m_Name: Error Testing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1040127077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -411,17 +411,6 @@ RectTransform:
   m_AnchoredPosition: {x: -349, y: -204}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1040127078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1040127076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a2d6283aa094ec40a3ebd86e6062c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1040127079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +451,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040127076}
   m_CullTransparentMesh: 0
+--- !u!114 &1040127081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1040127076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2d6283aa094ec40a3ebd86e6062c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starShipListCount: {fileID: 1040127079}
 --- !u!1 &1054705958
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +498,7 @@ MonoBehaviour:
   enemyShipBoss: {fileID: 1059142120453316, guid: 732512c5cdefcf449bdfeed418069cbe,
     type: 2}
   playSpace: {fileID: 1194905635}
-  starShip: {fileID: 1471450099262388, guid: 7ebcfd99a543e6c49a0616b6ef6b0a62, type: 2}
+  starShip: {fileID: 0}
   gameOverText: {fileID: 1208572924}
   maxNumberOfAsteroids: 2
   maxNumberOfEnemyShips: 1
@@ -843,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c74b6bbb2b3543c46a61e58633a55de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 1356971237}
 --- !u!1 &1913485354
 GameObject:
   m_ObjectHideFlags: 0

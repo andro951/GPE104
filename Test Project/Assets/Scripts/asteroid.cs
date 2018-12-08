@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class asteroid : MonoBehaviour {
+public class Asteroid : MonoBehaviour {
     private Rigidbody2D rb2D;
     private Vector3 vectorToPlayer;
     public float acceleration;
