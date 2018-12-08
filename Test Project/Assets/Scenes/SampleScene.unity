@@ -409,7 +409,7 @@ MonoBehaviour:
   enemyShipBoss: {fileID: 1059142120453316, guid: 732512c5cdefcf449bdfeed418069cbe,
     type: 2}
   playSpace: {fileID: 1194905635}
-  starShip: {fileID: 0}
+  starShip: {fileID: 1471450099262388, guid: 7ebcfd99a543e6c49a0616b6ef6b0a62, type: 2}
   gameOverText: {fileID: 1208572924}
   maxNumberOfAsteroids: 2
   maxNumberOfEnemyShips: 1

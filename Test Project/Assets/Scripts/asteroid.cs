@@ -14,7 +14,7 @@ public class asteroid : MonoBehaviour {
         tf = GetComponent<Transform>();
         rb2D = GetComponent<Rigidbody2D>();
         GameManager.instance.asteroidList.Add(this.gameObject);
-        vectorToPlayer = GameManager.instance.starShipPref.transform.position - this.gameObject.transform.position;
+        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
         tf.right = vectorToPlayer;
     }
 	

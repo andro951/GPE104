@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
     public int respawnTimer;
 
     // Use this for initialization
-    void Awake () {
+    void Start () {
         if (instance == null)
         {
             instance = this;
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour {
         {
             if (lives > 0)
             {
-                GameObject starShip = Instantiate(starShipPref, Vector3.zero, Quaternion.Euler(Vector3.zero)) as GameObject;
+                starShip = Instantiate(starShipPref, Vector3.zero, Quaternion.Euler(Vector3.zero)) as GameObject;
             }
             else
             {

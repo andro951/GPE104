@@ -20,7 +20,7 @@ public class enemyShipBoss : MonoBehaviour {
         tf = GetComponent<Transform>();
         rb2D = GetComponent<Rigidbody2D>();
         GameManager.instance.enemyShipList.Add(this.gameObject);
-        starShipPosition = GameManager.instance.starShipPref.transform.position;
+        starShipPosition = GameManager.instance.starShip.transform.position;
         vectorToPlayer = starShipPosition - this.gameObject.transform.position;
         tf.right = vectorToPlayer;
         //In progress.  Does not currently Work.
@@ -32,7 +32,7 @@ public class enemyShipBoss : MonoBehaviour {
     {
         
 
-        vectorToPlayer = GameManager.instance.starShipPref.transform.position - this.gameObject.transform.position;
+        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
         vectorToPlayer.Normalize();
         tf.right = tf.right + vectorToPlayer * turnSpeed;
         rb2D.AddForce(tf.right * acceleration);

@@ -15,14 +15,14 @@ public class enemyShip : MonoBehaviour {
         tf = GetComponent<Transform>();
         rb2D = GetComponent<Rigidbody2D>();
         GameManager.instance.enemyShipList.Add(this.gameObject);
-        vectorToPlayer = GameManager.instance.starShipPref.transform.position - this.gameObject.transform.position;
+        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
         tf.right = vectorToPlayer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        vectorToPlayer = GameManager.instance.starShipPref.transform.position - this.gameObject.transform.position;
+        vectorToPlayer = GameManager.instance.starShip.transform.position - this.gameObject.transform.position;
         vectorToPlayer.Normalize();
         tf.right = tf.right + vectorToPlayer * turnSpeed;
         rb2D.AddForce(tf.right * acceleration);
